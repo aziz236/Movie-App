@@ -1,6 +1,6 @@
    .input-adj{
-       margin-left: -40px;
-        margin-top: 50px;
+       margin-left: -300px;
+        margin-top: -10px;
         height: 50px;
         width: 600px;
         font-size: 25px;
@@ -23,6 +23,7 @@ input[type="radio"]{
     max-width: 1000px;
     padding: 1rem;
     margin-bottom: 300px;
+    margin-top: -5px;
    
   }
   
@@ -91,6 +92,7 @@ input[type="radio"]{
 }
   .input-placement{
     margin-top: -170px;
+   
   }
   .modalSubmitButton{
     height: 50px;
@@ -119,3 +121,6 @@ input[type="radio"]{
     margin-top: -400px;
   }
   
+  .movies{
+    margin-top: -200px;
+  }

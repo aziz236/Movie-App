@@ -1,13 +1,15 @@
-import React,{ useState } from "react";
+import React,{ useState,useEffect,useRef } from "react";
 import './App.css'
 import RootComponent from './RootComponent'
 
 function App() {
 
-  return(
-    <div>
-       <RootComponent/>
-     </div>
+
+  return (
+    <div className="App">
+      <RootComponent/>
+    </div>
+     
    );
  }
 export default App

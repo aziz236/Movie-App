@@ -68,7 +68,6 @@ const [validName, setValidName]= useState('')
   const [movieRating, setMovieRating] = useState('');
   const [image, setImage] = useState('');
   const [video, setVideo] = useState('');
-  const finalResult =ratingResults.concat(newMovies)
   /* Search By Name */
   const handleChange = event => {
     setSearchTerm(event.target.value);
@@ -96,54 +95,64 @@ const [validName, setValidName]= useState('')
    /*******************/
   
 
- 
+  const [todos, setTodos] = useState([ MovieInfos ]);
+
+
+
   
-   const addMovie = (title,description) => {
-       setNewMovies([...newMovies, { 
-         title, id: Math.random(),
-         description, id: Math.random(),
-         rating, id: Math.random(),
-         image, id: Math.random(),
-         video, id: Math.random()    
-           }])
-   } 
+
  
-   
-   const handleSubmitName = (e) => {
-       e.preventDefault();
-       
-       addMovie(title,description,rating,image,video);
-       setTitle('');
-       setDescription('');
-       setMovieRating('');
-       setImage('');
-       setVideo('');
-   }
-   
-   const [show, setShow] = useState(false);
-   const openModal = () => setShow(true);
-   const closeModal = () => setShow(false);
+  const addMovie = (title,description) => {
+      setNewMovies([...newMovies, { 
+        title, id: Math.random(),
+        description, id: Math.random(),
+        movieRating, id: Math.random(),
+        image, id: Math.random(),
+        video, id: Math.random()    
+          }])
+  } 
+
+  
+  const handleSubmitName = (e) => {
+      e.preventDefault();
+      
+      addMovie(title,description,rating,image,video);
+      setTitle('');
+      setDescription('');
+      setMovieRating('');
+      setImage('');
+      setVideo('');
+  }
+  
+  const [show, setShow] = useState(false);
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
    return (
     <div>
-        <div className="App">
+          <div className="App">
         {!show && <button className="button-adj" onClick={openModal}>Add a Movie</button>}
       <div className={show ? "modal" : "hide"}>
         <button onClick={closeModal}>X</button>
-        
         <form className="add-movie-inputs" onSubmit={handleSubmitName}  >
-          <div className="modal-placement">
           <p> Name:<input className="write-your-input" type="text" placeholder="Movie Name" value={title} required onChange={(props)=> setTitle(props.target.value)}/></p>
           <p> Description:<input className="write-your-input" type="text" placeholder="Movie Description" value={description} required onChange={(props)=> setDescription(props.target.value)}/></p>
           <p> Rating:<input className="write-your-input" type="text" placeholder="Movie Rating(1 -> 5)" value={movieRating} required onChange={(props)=> setMovieRating(props.target.value)}/></p>
           <p>Image:<input className="write-your-input" type="text" placeholder="Movie Image (Image Link)" value={image} required onChange={(props)=> setImage(props.target.value)}/></p>
           <p>Trailer:<input className="write-your-input" type="text" placeholder="Movie Trailer (Video Link)" value={video} required onChange={(props)=> setVideo(props.target.value)}/></p>
-           <input className="modalSubmitButton" type="submit"></input>
-           </div>
+           <input  type="submit"></input>
         </form>
-        
       </div>
       </div>
-     
+    
+    
+        {todos.map(todo => {
+                  return (
+                      <div className="TODOS">
+                       <p contenteditable="true" id="textarea" className="todos-phrases" key={todo.id}>{todo.title}</p>
+                       
+                     
+                       </div>
+              )})}
         
 
       <div className="input-placement">
@@ -182,8 +191,8 @@ const [validName, setValidName]= useState('')
        <br/>
 
        <div>
-          {finalResult.map(item => (
-           <MovieModel 
+          {ratingResults.map(item => (
+           <MovieModel className="movies"
            name={item.name} 
            image={item.image} 
            description={item.description} 
@@ -192,7 +201,20 @@ const [validName, setValidName]= useState('')
            />
          ))}
          </div>
-        
+         {newMovies.map(newMovie => {
+                  return (
+                    <div className="newMovieS">
+                    <MovieModel 
+                    name={newMovie.title} 
+                    image={newMovie.image} 
+                    description={newMovie.description} 
+                    video={newMovie.video} 
+                    rating={newMovie.movieRating}
+                    keyExtractor={item => item.id}
+                    />
+                   
+                    </div>
+                         )})}
          </div>
    );
  }
